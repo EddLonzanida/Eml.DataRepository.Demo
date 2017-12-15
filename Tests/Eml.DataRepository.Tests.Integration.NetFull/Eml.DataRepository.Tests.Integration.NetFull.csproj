@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net452;net46;net461;net462;net47;net471</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\Eml.DataRepository.Tests.Integration.NetCore\TestArtifacts\Migrations\JsonSources\bets.json" Link="TestArtifacts\Migrations\JsonSources\bets.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Eml.DataRepository.Tests.Integration.NetCore\TestArtifacts\Migrations\JsonSources\customers.json" Link="TestArtifacts\Migrations\JsonSources\customers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Eml.DataRepository.Tests.Integration.NetCore\TestArtifacts\Migrations\JsonSources\races.json" Link="TestArtifacts\Migrations\JsonSources\races.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Eml.DataRepository" Version="2.0.0.120" />
+    <PackageReference Include="Eml.MefBootstrapper" Version="2.0.1.41" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.console" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="Shouldly" Version="2.8.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
