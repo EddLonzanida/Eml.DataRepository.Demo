@@ -2,6 +2,7 @@
 using System.Composition.Hosting;
 using System.Composition.Hosting.Core;
 using System.Data;
+using Eml.ClassFactory.Contracts;
 using Eml.ConfigParser.Helpers;
 using Eml.DataRepository.Attributes;
 using Eml.DataRepository.Extensions;
@@ -10,18 +11,20 @@ using Xunit;
 
 namespace Eml.DataRepository.Tests.Integration.NetCore.BaseClasses
 {
-    public class TestDbFixture : IDisposable
+    public class IntegrationTestDbFixture : IDisposable
     {
-        public const string COLLECTION_DEFINITION = "TestDb CollectionDefinition";
+        public const string COLLECTION_DEFINITION = "IntegrationTestDbFixture CollectionDefinition";
+
+        public static IClassFactory ClassFactory { get; private set; }
 
         private readonly IMigrator dbMigration;
 
-        public TestDbFixture()
+        public IntegrationTestDbFixture()
         {
             var configuration = ConfigBuilder.GetConfiguration();
 
             ExportDescriptorProvider instanceRegistration(ContainerConfiguration r) => r.WithInstance(configuration);
-            Bootstrapper.Init(instanceRegistration);
+            ClassFactory = Bootstrapper.Init(instanceRegistration);
             dbMigration = GetTestDbMigration();
 
             if (dbMigration == null)
@@ -40,20 +43,22 @@ namespace Eml.DataRepository.Tests.Integration.NetCore.BaseClasses
         {
             Console.WriteLine("Detach and DestroyDb..");
 
-            dbMigration?.DestroyDb();
-            Mef.ClassFactory.Dispose();
+            dbMigration.DestroyDb();
+
+            var container = ClassFactory.Container;
+
+            ClassFactory = null;
+            container.Dispose();
         }
 
         private static IMigrator GetTestDbMigration()
         {
-            var classfactory = Mef.ClassFactory.Get();
-
-            return classfactory.GetMigrator(Environments.INTEGRATIONTEST);
+            return ClassFactory.GetMigrator(Environments.INTEGRATIONTEST);
         }
     }
 
-    [CollectionDefinition(TestDbFixture.COLLECTION_DEFINITION)]
-    public class TestDbFixtureCollectionDefinition : ICollectionFixture<TestDbFixture>
+    [CollectionDefinition(IntegrationTestDbFixture.COLLECTION_DEFINITION)]
+    public class IntegrationTestDbFixtureCollectionDefinition : ICollectionFixture<IntegrationTestDbFixture>
     {
         // This class has no code, and is never created. Its purpose is simply
         // to be the place to apply [CollectionDefinition] and all the

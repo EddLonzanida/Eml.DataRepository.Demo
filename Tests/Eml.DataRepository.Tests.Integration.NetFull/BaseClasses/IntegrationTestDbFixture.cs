@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using Eml.ClassFactory.Contracts;
 using Eml.DataRepository.Attributes;
 using Eml.DataRepository.Extensions;
 using Eml.Mef;
@@ -7,20 +8,20 @@ using Xunit;
 
 namespace Eml.DataRepository.Tests.Integration.NetFull.BaseClasses
 {
-    public class TestDbFixture : IDisposable
+    public class IntegrationTestDbFixture : IDisposable
     {
         public const string COLLECTION_DEFINITION = "TestDbNetFull CollectionDefinition";
         
         private readonly IMigrator dbMigration;
 
-        public TestDbFixture()
+        public static IClassFactory ClassFactory { get; private set; }
+
+        public IntegrationTestDbFixture()
         {
             Console.WriteLine("Bootstrapper.Init()..");
-            Bootstrapper.Init();
+            ClassFactory = Bootstrapper.Init();
 
-            var classFactory = Mef.ClassFactory.Get();
-
-            dbMigration = classFactory.GetMigrator(Environments.INTEGRATIONTEST);
+            dbMigration = ClassFactory.GetMigrator(Environments.INTEGRATIONTEST);
             if (dbMigration == null)
             {
                 throw new NoNullAllowedException("dbMigration not found..");
@@ -36,14 +37,18 @@ namespace Eml.DataRepository.Tests.Integration.NetFull.BaseClasses
         public void Dispose()
         {
             Console.WriteLine("DisposeDatabase..");
+
             dbMigration.DestroyDb();
 
-            Mef.ClassFactory.Dispose();
+            var container = ClassFactory.Container;
+
+            ClassFactory = null;
+            container.Dispose();
         }
     }
 
-    [CollectionDefinition(TestDbFixture.COLLECTION_DEFINITION)]
-    public class TestDbFixtureCollectionDefinition : ICollectionFixture<TestDbFixture>
+    [CollectionDefinition(IntegrationTestDbFixture.COLLECTION_DEFINITION)]
+    public class IntegrationTestDbFixtureCollectionDefinition : ICollectionFixture<IntegrationTestDbFixture>
     {
         // This class has no code, and is never created. Its purpose is simply
         // to be the place to apply [CollectionDefinition] and all the

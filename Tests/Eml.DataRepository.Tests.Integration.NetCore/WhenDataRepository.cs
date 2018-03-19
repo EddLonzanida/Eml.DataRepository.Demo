@@ -14,7 +14,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         private void GetAutoCompleteIntellisense_ShouldReturnHorsesAsc()
         {
-            var repository = classfactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
 
             var results = repository.Get(r => r.Include(s => s.Race),
                  r => r.RaceId == 1,
@@ -29,7 +29,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         private void GetAutoCompleteIntellisense_ShouldReturnHorsesDesc()
         {
-            var repository = classfactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
 
             var results = repository.Get(r => r.Include(s => s.Race),
                 r => r.RaceId == 1,
@@ -44,7 +44,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         private async Task GetAutoCompleteIntellisenseAsync_ShouldReturnHorseOrderByName()
         {
-            var repository = classfactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
 
             var results = await repository.GetAutoCompleteIntellisenseAsync(r => r.Include(s => s.Race),
                 r => r.RaceId == 1,
@@ -60,7 +60,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         private async Task GetAutoCompleteIntellisenseAsync_ShouldReturnHorseDescName()
         {
-            var repository = classfactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
 
             var results = await repository.GetAutoCompleteIntellisenseAsync(r => r.Include(s => s.Race),
                 r => r.RaceId == 1,
@@ -76,7 +76,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         private async Task GetAutoCompleteIntellisenseAsync_ShouldReturnCustomerOrderByName()
         {
-            var repository = classfactory.GetExport<IDataRepositorySoftDeleteInt<Customer>>();
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Customer>>();
 
             var results = await repository.GetAutoCompleteIntellisenseAsync(r => r.Name.Contains("ar"),
                 r => r.OrderBy(s => s.Name),
@@ -90,7 +90,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         private async Task GetAutoCompleteIntellisenseAsync_ShouldReturnCustomerDescByName()
         {
-            var repository = classfactory.GetExport<IDataRepositorySoftDeleteInt<Customer>>();
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Customer>>();
 
             var results = await repository.GetAutoCompleteIntellisenseAsync(r => r.Name.Contains("ar"),
                 r => r.OrderByDescending(s => s.Name),
@@ -105,7 +105,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         private void Get_ShouldReturnHorses()
         {
             const string searchTerm = "ar";
-            var repository = classfactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
 
             var results = repository.Get(r => r.Include(s => s.Race),
                 r => r.Name.Contains(searchTerm),
@@ -118,7 +118,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         private void GetWhereClause_ShouldReturnHorses()
         {
             const string searchTerm = "ar";
-            var repository = classfactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
 
             var results = repository.Get(r => r.Name.Contains(searchTerm));
 

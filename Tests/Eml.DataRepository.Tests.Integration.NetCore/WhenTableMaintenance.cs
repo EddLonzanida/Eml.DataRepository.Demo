@@ -14,7 +14,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         private void GetPagedList_ShouldReturnHorse()
         {
             const string searchTerm = "ar";
-            var repository = (ITableMaintenance<Horse>)classfactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
+            var repository = (ITableMaintenance<Horse>)classFactory.GetExport<IDataRepositorySoftDeleteInt<Horse>>();
 
             var results = repository.GetPagedList(1, r => r.Include(s => s.Race),
                 r => r.Name.Contains(searchTerm),

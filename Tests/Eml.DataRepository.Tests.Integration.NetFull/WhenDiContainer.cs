@@ -7,20 +7,20 @@ using Xunit;
 
 namespace Eml.DataRepository.Tests.Integration.NetFull
 {
-    public class WhenDiContainer : IntegrationTestDbBase
+    public class WhenDiContainer : IntegrationTestDiBase
     {
         [Fact]
         public void DataRepositoryInt_ShouldBeDiscoverable()
         {
-            var repositories = classfactory.GetLazyExports<IDataRepositoryInt<ContactPerson>>();
+            var repositories = classFactory.GetLazyExports<IDataRepositoryInt<ContactPerson>>();
 
-            repositories.Count.ShouldBe(2);
+            repositories.Count.ShouldBe(1);
         }
 
         [Fact]
         public void DataRepositorySoftDeleteInt_ShouldBeDiscoverable()
         {
-            var repositories = classfactory.GetLazyExports<IDataRepositorySoftDeleteInt<ContactPerson>>();
+            var repositories = classFactory.GetLazyExports<IDataRepositorySoftDeleteInt<ContactPerson>>();
 
             repositories.Count.ShouldBe(1);
         }
@@ -28,15 +28,15 @@ namespace Eml.DataRepository.Tests.Integration.NetFull
         [Fact]
         public void DataRepositoryString_ShouldBeDiscoverable()
         {
-            var repositories = classfactory.GetLazyExports<IDataRepositoryGuid<Company>>();
+            var repositories = classFactory.GetLazyExports<IDataRepositoryGuid<Company>>();
 
-            repositories.Count.ShouldBe(2);
+            repositories.Count.ShouldBe(1);
         }
 
         [Fact]
         public void DataRepositorySoftDeleteString_ShouldBeDiscoverable()
         {
-            var repositories = classfactory.GetLazyExports<IDataRepositorySoftDeleteGuid<Company>>();
+            var repositories = classFactory.GetLazyExports<IDataRepositorySoftDeleteGuid<Company>>();
 
             repositories.Count.ShouldBe(1);
         }
@@ -46,7 +46,7 @@ namespace Eml.DataRepository.Tests.Integration.NetFull
         {
             const string value = @"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=TestDbFull;Integrated Security=True";
           
-            var config = classfactory.GetExport<IConfigBase<string, MainDbConnectionString>>();
+            var config = classFactory.GetExport<IConfigBase<string, MainDbConnectionString>>();
 
             config.ShouldNotBeNull();
             config.Value.ShouldBe(value);
@@ -55,7 +55,7 @@ namespace Eml.DataRepository.Tests.Integration.NetFull
         [Fact]
         public void IntellisenseCountConfig_ShouldBeDiscoverable()
         {
-            var config = classfactory.GetExport<IConfigBase<int, IntellisenseCountConfig>>();
+            var config = classFactory.GetExport<IConfigBase<int, IntellisenseCountConfig>>();
 
             config.ShouldNotBeNull();
             config.Value.ShouldBe(15);
@@ -64,7 +64,7 @@ namespace Eml.DataRepository.Tests.Integration.NetFull
         [Fact]
         public void PageSizeConfig_ShouldBeDiscoverable()
         {
-            var config = classfactory.GetExport<IConfigBase<int, PageSizeConfig>>();
+            var config = classFactory.GetExport<IConfigBase<int, PageSizeConfig>>();
 
             config.ShouldNotBeNull();
             config.Value.ShouldBe(10);

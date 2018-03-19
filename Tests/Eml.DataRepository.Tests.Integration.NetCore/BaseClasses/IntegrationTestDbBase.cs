@@ -3,14 +3,14 @@ using Xunit;
 
 namespace Eml.DataRepository.Tests.Integration.NetCore.BaseClasses
 {
-    [Collection(TestDbFixture.COLLECTION_DEFINITION)]
+    [Collection(IntegrationTestDbFixture.COLLECTION_DEFINITION)]
     public abstract class IntegrationTestDbBase
     {
-        protected readonly IClassFactory classfactory;
+        protected readonly IClassFactory classFactory;
 
         protected IntegrationTestDbBase()
         {
-            classfactory = Mef.ClassFactory.Get();
+            classFactory = IntegrationTestDbFixture.ClassFactory;
         }
     }
 }

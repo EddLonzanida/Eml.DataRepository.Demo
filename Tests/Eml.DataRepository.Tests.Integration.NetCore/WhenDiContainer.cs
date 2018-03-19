@@ -6,12 +6,12 @@ using Xunit;
 
 namespace Eml.DataRepository.Tests.Integration.NetCore
 {
-    public class WhenDiContainer : IntegrationTestDbBase
+    public class WhenDiContainer : IntegrationTestDiBase
     {
         [Fact]
         public void DataRepositoryInt_ShouldBeDiscoverable()
         {
-            var repositories = classfactory.GetLazyExports<IDataRepositoryInt<ContactPerson>>();
+            var repositories = classFactory.GetLazyExports<IDataRepositoryInt<ContactPerson>>();
 
             repositories.Count.ShouldBe(1);
         }
@@ -19,7 +19,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         public void DataRepositorySoftDeleteInt_ShouldBeDiscoverable()
         {
-            var repositories = classfactory.GetLazyExports<IDataRepositorySoftDeleteInt<ContactPerson>>();
+            var repositories = classFactory.GetLazyExports<IDataRepositorySoftDeleteInt<ContactPerson>>();
 
             repositories.Count.ShouldBe(1);
         }
@@ -27,7 +27,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         public void DataRepositoryString_ShouldBeDiscoverable()
         {
-            var repositories = classfactory.GetLazyExports<IDataRepositoryGuid<Company>>();
+            var repositories = classFactory.GetLazyExports<IDataRepositoryGuid<Company>>();
 
             repositories.Count.ShouldBe(1);
         }
@@ -35,7 +35,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         public void DataRepositorySoftDeleteString_ShouldBeDiscoverable()
         {
-            var repositories = classfactory.GetLazyExports<IDataRepositorySoftDeleteGuid<Company>>();
+            var repositories = classFactory.GetLazyExports<IDataRepositorySoftDeleteGuid<Company>>();
 
             repositories.Count.ShouldBe(1);
         }
@@ -45,7 +45,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         {
             const string value = "Server=(LocalDB)\\MSSQLLocalDB;Database=TestDbNetCore;MultipleActiveResultSets=true;Integrated Security=True";
 
-            var config = classfactory.GetExport<MainDbConnectionString>();
+            var config = classFactory.GetExport<MainDbConnectionString>();
 
             config.ShouldNotBeNull();
             config.Value.ShouldBe(value);
@@ -54,7 +54,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         public void IntellisenseCountConfig_ShouldBeDiscoverable()
         {
-            var config = classfactory.GetExport<IntellisenseCountConfig>();
+            var config = classFactory.GetExport<IntellisenseCountConfig>();
 
             config.ShouldNotBeNull();
             config.Value.ShouldBe(15);
@@ -63,7 +63,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
         [Fact]
         public void PageSizeConfig_ShouldBeDiscoverable()
         {
-            var config = classfactory.GetExport<PageSizeConfig>();
+            var config = classFactory.GetExport<PageSizeConfig>();
 
             config.ShouldNotBeNull();
             config.Value.ShouldBe(10);
