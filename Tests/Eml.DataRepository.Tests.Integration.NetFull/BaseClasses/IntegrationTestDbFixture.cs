@@ -12,6 +12,8 @@ namespace Eml.DataRepository.Tests.Integration.NetFull.BaseClasses
     {
         public const string COLLECTION_DEFINITION = "TestDbNetFull CollectionDefinition";
         
+        private const string DB_DIRECTORY = "DataBase";
+
         private readonly IMigrator dbMigration;
 
         public static IClassFactory ClassFactory { get; private set; }
@@ -31,13 +33,12 @@ namespace Eml.DataRepository.Tests.Integration.NetFull.BaseClasses
             dbMigration.DestroyDb();
 
             Console.WriteLine("CreateDb..");
-            dbMigration.CreateDb();
+            dbMigration.CreateDb(DB_DIRECTORY);
         }
 
         public void Dispose()
         {
             Console.WriteLine("DisposeDatabase..");
-
             dbMigration.DestroyDb();
 
             var container = ClassFactory.Container;

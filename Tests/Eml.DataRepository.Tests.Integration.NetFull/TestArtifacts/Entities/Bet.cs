@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Eml.EntityBaseClasses;
+using System.ComponentModel.DataAnnotations;
 
 namespace Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts.Entities
 {
-    public class Bet : EntityBase
+    public class Bet : EntityBaseSoftDeleteInt
     {
         [Required]
         [Display(Name = "Customer")]

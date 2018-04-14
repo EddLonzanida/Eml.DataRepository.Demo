@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts
 {
-    public class TestDb : DbContext, IAllowIdentityInsertWhenSeeding
+    public class TestDb : DbContext
     {
-        public bool AllowIdentityInsertWhenSeeding { get; set; }
-
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Bet> Bets { get; set; }
@@ -26,9 +24,11 @@ namespace Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts
                 .EnableSensitiveDataLogging();
         }
 
+        private bool allowIdentityInsertWhenSeeding  = true;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            if (AllowIdentityInsertWhenSeeding)
+            if (allowIdentityInsertWhenSeeding)
             {
                 foreach (var pb in modelBuilder.Model
                     .GetEntityTypes()

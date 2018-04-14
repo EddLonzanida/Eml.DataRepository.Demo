@@ -1,12 +1,9 @@
-﻿using System;
-using Eml.Contracts.Entities;
+﻿using Eml.EntityBaseClasses;
 
 namespace Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts.Entities
 {
-    public class ContactPerson : IEntityBase<int>, IEntitySoftdeletableBase
+    public class ContactPerson : EntityBaseSoftDeleteInt
     {
-        public int Id { get; set; }
-
         public int CompanyId { get; set; }
 
         public int PositionTitleId { get; set; }
@@ -14,9 +11,5 @@ namespace Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts.Entities
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-
-        public DateTime? DateDeleted { get; set; }
-
-        public string DeletionReason { get; set; }
     }
 }

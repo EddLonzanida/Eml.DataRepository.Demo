@@ -1,6 +1,8 @@
-﻿namespace Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts.Entities
+﻿using Eml.EntityBaseClasses;
+
+namespace Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts.Entities
 {
-    public class Customer : EntityBase
+    public class Customer : EntityBaseSoftDeleteInt
     {
         public string Name { get; set; }
     }

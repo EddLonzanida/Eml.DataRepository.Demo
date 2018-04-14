@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using Eml.Contracts.Repositories;
+using Eml.DataRepository.Contracts;
 using Eml.DataRepository.Tests.Integration.NetFull.BaseClasses;
 using Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts.Entities;
 using Shouldly;
@@ -99,6 +99,42 @@ namespace Eml.DataRepository.Tests.Integration.NetFull
             results.Count.ShouldBe(2);
             results[0].ShouldBe("Mark");
             results[1].ShouldBe("Jared");
+        }
+
+        [Fact]
+        private void GetId_ShouldReturnCustomer()
+        {
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Customer>>();
+
+            var result = repository.Get(1);
+
+            result.Id.ShouldBe(1);
+        }
+
+        [Fact]
+        private async Task GetAsyncId_ShouldReturnCustomer()
+        {
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Customer>>();
+
+            var result = await repository.GetAsync(1);
+
+            result.Id.ShouldBe(1);
+        }
+
+        [Fact]
+        private async Task DeleteItem_ShouldSoftDeleteCustomer()
+        {
+            var dataRepositorySoftDeleteInt = classFactory.GetExport<IDataRepositorySoftDeleteInt<Customer>>();
+            var dataRepositoryInt = classFactory.GetExport<IDataRepositoryInt<Customer>>();
+
+            await dataRepositorySoftDeleteInt.DeleteAsync(13, "Test");
+            var result = await dataRepositorySoftDeleteInt.GetAsync(13);
+            var resultAfter = await dataRepositoryInt.GetAsync(13);
+
+            result.ShouldBeNull();
+            resultAfter.ShouldNotBeNull();
+            resultAfter.DeletionReason.ShouldBe("Test");
+            resultAfter.DateDeleted.HasValue.ShouldBeTrue();
         }
 
         [Fact]

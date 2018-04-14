@@ -1,6 +1,6 @@
 ﻿using System.Composition;
 using Eml.Contracts.Entities;
-using Eml.Contracts.Repositories;
+using Eml.DataRepository.Contracts;
 using Microsoft.Extensions.Configuration;
 
 namespace Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts.Repositories

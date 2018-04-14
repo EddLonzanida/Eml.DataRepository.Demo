@@ -1,14 +1,8 @@
-﻿using System;
-using Eml.Contracts.Entities;
+﻿using Eml.EntityBaseClasses;
 
 namespace Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts.Entities
 {
-    public class Company : IEntityBase<Guid>, IEntitySoftdeletableBase
+    public class Company : EntityBaseSoftDeleteGuid
     {
-        public Guid Id { get; set; }
-
-        public DateTime? DateDeleted { get; set; }
-
-        public string DeletionReason { get; set; }
     }
 }

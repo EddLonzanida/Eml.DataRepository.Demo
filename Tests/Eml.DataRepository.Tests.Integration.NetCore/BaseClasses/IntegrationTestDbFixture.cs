@@ -15,6 +15,8 @@ namespace Eml.DataRepository.Tests.Integration.NetCore.BaseClasses
     {
         public const string COLLECTION_DEFINITION = "IntegrationTestDbFixture CollectionDefinition";
 
+        private const string DB_DIRECTORY = "DataBase";
+
         public static IClassFactory ClassFactory { get; private set; }
 
         private readonly IMigrator dbMigration;
@@ -36,7 +38,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore.BaseClasses
             dbMigration.DestroyDb();
 
             Console.WriteLine("CreateDb..");
-            dbMigration.CreateDb();
+            dbMigration.CreateDb(DB_DIRECTORY);
         }
 
         public void Dispose()

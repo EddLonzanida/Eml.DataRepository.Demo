@@ -6,25 +6,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Eml.DataRepository" Version="2.0.0.134" />
-    <PackageReference Include="Eml.MefBootstrapper" Version="2.0.1.55" />
+    <PackageReference Include="Eml.DataRepository" Version="2.0.0.176" />
+    <PackageReference Include="Eml.EntityBaseClasses" Version="1.0.0.17" />
+    <PackageReference Include="Eml.MefBootstrapper" Version="2.0.1.63" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <PackageReference Include="Shouldly" Version="3.0.0" />
+    <PackageReference Include="Shouldly" Version="2.8.3" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TestArtifacts\Migrations\JsonSources\bets.json">
+    <None Update="TestArtifacts\Migrations\SeedDataSources\bets.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="TestArtifacts\Migrations\JsonSources\customers.json">
+    <None Update="TestArtifacts\Migrations\SeedDataSources\customers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="TestArtifacts\Migrations\JsonSources\races.json">
+    <None Update="TestArtifacts\Migrations\SeedDataSources\races.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

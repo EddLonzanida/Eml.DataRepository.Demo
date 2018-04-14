@@ -2,19 +2,19 @@
 using System.Composition;
 using Eml.DataRepository.Attributes;
 using Eml.DataRepository.BaseClasses;
-using Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts.Migrations.Utils;
+using Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts.Migrations.Seeders;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts.Migrations
 {
     [DbMigratorExport(Environments.INTEGRATIONTEST)]
-    public class IntegrationTestDbMigration : MigratorBase<TestDb>
+    public class IntegrationTestDbMigrator : MigratorBase<TestDb>
     {
-        private const string JSON_SOURCES = @"TestArtifacts\Migrations\JsonSources";
+        private const string RELATIVE_FOLDER_DATA_SOURCES = @"TestArtifacts\Migrations\SeedDataSources";
 
         [ImportingConstructor]
-        public IntegrationTestDbMigration(MainDbConnectionString mainDbConnectionString)
-            : base(mainDbConnectionString.Value, true)
+        public IntegrationTestDbMigrator(MainDbConnectionString mainDbConnectionString)
+            : base(mainDbConnectionString.Value)
         {
         }
 
@@ -32,9 +32,9 @@ namespace Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts.Migrations
             context.Database.Migrate();
 
             Console.WriteLine("Seeding Data..");
-            CustomerData.Seed(context, JSON_SOURCES);
-            RaceData.Seed(context, JSON_SOURCES);
-            BetData.Seed(context, JSON_SOURCES);
+            CustomerSeeder.Seed(context, RELATIVE_FOLDER_DATA_SOURCES);
+            RaceSeeder.Seed(context, RELATIVE_FOLDER_DATA_SOURCES);
+            BetSeeder.Seed(context, RELATIVE_FOLDER_DATA_SOURCES);
         }
     }
 }

@@ -6,11 +6,11 @@ using Eml.DataRepository.BaseClasses;
 namespace Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts.Migrations
 {
     [DbMigratorExport(Environments.INTEGRATIONTEST)]
-    public class IntegrationTestDbMigration : MigratorBase<TestDb, Configuration>
+    public class IntegrationTestDbMigrator : MigratorBase<TestDb, Configuration>
     {
         [ImportingConstructor]
-        public IntegrationTestDbMigration(IConfigBase<string, MainDbConnectionString> mainDbConnectionString)
-            :base(mainDbConnectionString.Value, true)
+        public IntegrationTestDbMigrator(IConfigBase<string, MainDbConnectionString> mainDbConnectionString)
+            : base(mainDbConnectionString.Value)
         {
         }
     }

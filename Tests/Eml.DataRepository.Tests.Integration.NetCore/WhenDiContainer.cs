@@ -1,4 +1,5 @@
-﻿using Eml.Contracts.Repositories;
+﻿using Eml.ClassFactory.Contracts;
+using Eml.DataRepository.Contracts;
 using Eml.DataRepository.Tests.Integration.NetCore.BaseClasses;
 using Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts.Entities;
 using Shouldly;
@@ -6,7 +7,7 @@ using Xunit;
 
 namespace Eml.DataRepository.Tests.Integration.NetCore
 {
-    public class WhenDiContainer : IntegrationTestDiBase
+    public class WhenDiContainer : IntegrationTestDbBase
     {
         [Fact]
         public void DataRepositoryInt_ShouldBeDiscoverable()
@@ -14,6 +15,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
             var repositories = classFactory.GetLazyExports<IDataRepositoryInt<ContactPerson>>();
 
             repositories.Count.ShouldBe(1);
+            repositories.FirstInstance().ShouldNotBeNull();
         }
 
         [Fact]
@@ -22,6 +24,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
             var repositories = classFactory.GetLazyExports<IDataRepositorySoftDeleteInt<ContactPerson>>();
 
             repositories.Count.ShouldBe(1);
+            repositories.FirstInstance().ShouldNotBeNull();
         }
 
         [Fact]
@@ -30,6 +33,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
             var repositories = classFactory.GetLazyExports<IDataRepositoryGuid<Company>>();
 
             repositories.Count.ShouldBe(1);
+            repositories.FirstInstance().ShouldNotBeNull();
         }
 
         [Fact]
@@ -38,6 +42,7 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
             var repositories = classFactory.GetLazyExports<IDataRepositorySoftDeleteGuid<Company>>();
 
             repositories.Count.ShouldBe(1);
+            repositories.FirstInstance().ShouldNotBeNull();
         }
 
         [Fact]

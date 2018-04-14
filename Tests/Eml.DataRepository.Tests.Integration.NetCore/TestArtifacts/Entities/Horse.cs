@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Eml.EntityBaseClasses;
+using System.ComponentModel.DataAnnotations;
 
 namespace Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts.Entities
 {
-    public class Horse : EntityBase
+    public class Horse : EntityBaseSoftDeleteInt
     {
         [Required]
         [Display(Name = "Race")]

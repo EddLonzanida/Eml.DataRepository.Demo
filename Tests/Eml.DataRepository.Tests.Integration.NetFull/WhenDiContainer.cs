@@ -1,5 +1,5 @@
 ﻿using Eml.ConfigParser;
-using Eml.Contracts.Repositories;
+using Eml.DataRepository.Contracts;
 using Eml.DataRepository.Tests.Integration.NetFull.BaseClasses;
 using Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts.Entities;
 using Shouldly;

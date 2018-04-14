@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Eml.EntityBaseClasses;
+using System;
 using System.Collections.Generic;
 
 namespace Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts.Entities
 {
-    public class Race : EntityBase
+    public class Race : EntityBaseSoftDeleteInt
     {
         public string Name { get; set; }
 

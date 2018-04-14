@@ -4,10 +4,8 @@ using Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts.Entities;
 
 namespace Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts
 {
-    public class TestDb : DbContext, IAllowIdentityInsertWhenSeeding
+    public class TestDb : DbContext
     {
-        public bool AllowIdentityInsertWhenSeeding { get; set; }
-
         public const string CONNECTION_STRING = "MainDbConnectionString";
 
         public DbSet<Customer> Customers { get; set; }
@@ -22,9 +20,11 @@ namespace Eml.DataRepository.Tests.Integration.NetFull.TestArtifacts
         {
         }
 
+        private bool allowIdentityInsertWhenSeeding  = true;
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            if (AllowIdentityInsertWhenSeeding)
+            if (allowIdentityInsertWhenSeeding)
             {
                 modelBuilder.Properties<int>().Where(r => r.Name.Equals("Id"))
                     .Configure(r => r.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None));

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Eml.Contracts.Repositories;
+using Eml.DataRepository.Contracts;
 using Eml.DataRepository.Tests.Integration.NetCore.BaseClasses;
 using Eml.DataRepository.Tests.Integration.NetCore.TestArtifacts.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -99,6 +99,26 @@ namespace Eml.DataRepository.Tests.Integration.NetCore
             results.Count.ShouldBe(2);
             results[0].ShouldBe("Mark");
             results[1].ShouldBe("Jared");
+        }
+
+        [Fact]
+        private void GetId_ShouldReturnCustomer()
+        {
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Customer>>();
+
+            var result = repository.Get(1);
+
+            result.Id.ShouldBe(1);
+        }
+
+        [Fact]
+        private async Task GetAsyncId_ShouldReturnCustomer()
+        {
+            var repository = classFactory.GetExport<IDataRepositorySoftDeleteInt<Customer>>();
+
+            var result = await repository.GetAsync(1);
+
+            result.Id.ShouldBe(1);
         }
 
         [Fact]

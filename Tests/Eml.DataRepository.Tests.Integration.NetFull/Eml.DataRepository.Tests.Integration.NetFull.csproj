@@ -1,30 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net452;net46;net461;net462;net47;net471</TargetFrameworks>
+    <TargetFrameworks>net46;net461;net462;net47;net471</TargetFrameworks>
   </PropertyGroup>
-
   <ItemGroup>
-    <Content Include="..\Eml.DataRepository.Tests.Integration.NetCore\TestArtifacts\Migrations\JsonSources\bets.json" Link="TestArtifacts\Migrations\JsonSources\bets.json">
+    <None Include="..\Eml.DataRepository.Tests.Integration.NetCore\TestArtifacts\Migrations\SeedDataSources\bets.json" Link="TestArtifacts\Migrations\SeedDataSources\bets.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Eml.DataRepository.Tests.Integration.NetCore\TestArtifacts\Migrations\JsonSources\customers.json" Link="TestArtifacts\Migrations\JsonSources\customers.json">
+    </None>
+    <None Include="..\Eml.DataRepository.Tests.Integration.NetCore\TestArtifacts\Migrations\SeedDataSources\customers.json" Link="TestArtifacts\Migrations\SeedDataSources\customers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Eml.DataRepository.Tests.Integration.NetCore\TestArtifacts\Migrations\JsonSources\races.json" Link="TestArtifacts\Migrations\JsonSources\races.json">
+    </None>
+    <None Include="..\Eml.DataRepository.Tests.Integration.NetCore\TestArtifacts\Migrations\SeedDataSources\races.json" Link="TestArtifacts\Migrations\SeedDataSources\races.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Eml.DataRepository" Version="2.0.0.134" />
-    <PackageReference Include="Eml.MefBootstrapper" Version="2.0.1.55" />
+    <PackageReference Include="Eml.DataRepository" Version="2.0.0.176" />
+    <PackageReference Include="Eml.EntityBaseClasses" Version="1.0.0.17" />
+    <PackageReference Include="Eml.MefBootstrapper" Version="2.0.1.63" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <PackageReference Include="Shouldly" Version="3.0.0" />
+    <PackageReference Include="Shouldly" Version="2.8.3" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App.config">
